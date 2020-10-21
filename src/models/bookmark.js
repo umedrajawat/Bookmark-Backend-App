@@ -1,6 +1,15 @@
 const mongoose = require('mongoose')
 const validator = require('validator')
 
+/**
+ * schema for Bookmark
+ * Each Bookmark will conatin
+ * Title
+ * Link
+ * Publisher
+ * Timestamps
+ */
+
 const userSchema = new mongoose.Schema({
     Link: {
         type: String,
@@ -20,19 +29,17 @@ const userSchema = new mongoose.Schema({
        type: String,
        trim: true,
     },
-    Tag:[]
+    Tag:[
+        {
+            type:String,
+            unique:true
+        }
+    ]
 }, {
     timestamps: true
 })
 
-// userSchema.virtual('tags', {
-//     ref: 'Tags',
-//     localField: '_id',
-//     foreignField: 'owner'
-// })
 
+const Bookmark = mongoose.model('Bookmark', userSchema)
 
-
-const User = mongoose.model('Users', userSchema)
-
-module.exports = User
+module.exports = Bookmark

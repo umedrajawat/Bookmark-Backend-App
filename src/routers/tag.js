@@ -1,24 +1,28 @@
 const express = require('express')
-const Tags = require('../models/task')
-const User=require('../models/user')
+const Tags = require('../models/tag')
+const Bookmark=require('../models/Bookmark')
 const router = new express.Router()
+
+/**
+ * This will create a new Tag . We need to provide Title of the Tag with the body in JSON format
+ */
 
 router.post('/tags', async (req, res) => {
     const tag = new Tags(req.body)
-    const user=await User.findByIdAndUpdate(req.body.owner,{
-         $push:{Tag:tag._id}
-     },{
-         new:true,useFindAndModify:false
-     });
-     console.log('user after update',user)
     try {
         await tag.save()
-        res.status(201).send(task)
+        res.status(201).send(tag)
     } catch (e) {
         res.status(400).send(e)
     }
 })
 
+
+
+
+/**
+ * This will retrieve all the Tags stored in the Tags collection
+ */
 router.get('/tags', async (req, res) => {
     try {
         const tags = await Tags.find({})
@@ -27,6 +31,12 @@ router.get('/tags', async (req, res) => {
         res.status(500).send()
     }
 })
+
+
+
+/**
+ * This API will retrieve only particular tag using the id passed as req param
+ */
 
 router.get('/tags/:id', async (req, res) => {
     const _id = req.params.id
@@ -44,6 +54,11 @@ router.get('/tags/:id', async (req, res) => {
     }
 })
 
+
+/**
+ * Thsi will delete the particular Tag matching with the id of req.params
+ */
+
 router.delete('/tags/:id', async (req, res) => {
     try {
         const tag = await Tags.findByIdAndDelete(req.params.id)
@@ -58,17 +73,27 @@ router.delete('/tags/:id', async (req, res) => {
     }
 })
 
-router.patch('/tags/add/:id',async(req,res)=>{
-    const tag = await Tags.findById(req.params.id)
-    const user=await User.findByIdAndUpdate(req.body.Bookmark,{
+
+
+/**
+ * This API will add a tag with the id as re.param and if it exists in Tag collection then it will add it to the bookmark whose id is passed as body of The api
+ * in JSON format
+ */
+router.patch('/addTag',async(req,res)=>{
+    const tag = await Tags.findById(req.body.tag)
+    if(!tag){
+        res.status(400).send('Tag NOT FOUND')
+    }
+
+    const bookmark=await Bookmark.findByIdAndUpdate(req.body.Bookmark,{
         $push:{Tag:tag._id}
     },{
         new:true,useFindAndModify:false
     });
-    console.log('user after update',user)
+    console.log('Bookmark after update',bookmark)
    try {
-       await user.save()
-       res.status(201).send(user)
+       await bookmark.save()
+       res.status(201).send(bookmark)
    } catch (e) {
        res.status(400).send(e)
    }

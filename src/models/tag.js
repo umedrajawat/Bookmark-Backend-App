@@ -1,5 +1,7 @@
 const mongoose = require('mongoose')
 
+//schema for Tags collection
+//Each Tag will contain a Title and timstamp
 const userSchema = new mongoose.Schema({
    Title: {
         type: String,
@@ -7,11 +9,6 @@ const userSchema = new mongoose.Schema({
         unique:true,
 
     },
-    // owner: {
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     required: true,
-    //     ref: 'User'
-    // }
 
 },{
     timestamps: true
