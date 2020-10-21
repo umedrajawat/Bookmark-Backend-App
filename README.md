@@ -25,24 +25,26 @@ Mongodb
 Mongoose
 
 
-
-
-
-
-
-
-
 Explanation of the Solution
 Server:
 Created a server using express exposing following endpoints
+
 http://localhost:3000/bookmark [METHOD-POST ] 
+
 http://localhost:3000/bookmarks[METHOD-GET]
+
 http://localhost:3000/bookmarks/:id[METHOD-GET ]
+
 http://localhost:3000/bookmarks/:id[METHOD-DELETE ]
+
 http://localhost:3000/tags[METHOD-POST ]
+
 http://localhost:3000/tags [METHOD-GET]
+
 http://localhost:3000/tags/:id [METHOD-GET ]
+
 http://localhost:3000/tags/:id [METHOD-DELETE]
+
 http://localhost:3000/addTag [METHOD-PATCH]
 
 DEPLOYMENT - These APIs are deployed in AWS EC2 instance and can be used by replacing 
