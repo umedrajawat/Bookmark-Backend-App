@@ -1,6 +1,6 @@
 const express = require('express')
 const Tags = require('../models/tag')
-const Bookmark=require('../models/Bookmark')
+const Bookmark=require('../models/bookmark')
 const router = new express.Router()
 
 /**
@@ -36,6 +36,7 @@ router.get('/tags', async (req, res) => {
 
 /**
  * This API will retrieve only particular tag using the id passed as req param
+ *  eg: httl://localhost/tags/89987346874egf 
  */
 
 router.get('/tags/:id', async (req, res) => {
@@ -56,7 +57,8 @@ router.get('/tags/:id', async (req, res) => {
 
 
 /**
- * Thsi will delete the particular Tag matching with the id of req.params
+ * This will delete the particular Tag matching with the id of req.params
+ * 
  */
 
 router.delete('/tags/:id', async (req, res) => {
@@ -76,8 +78,7 @@ router.delete('/tags/:id', async (req, res) => {
 
 
 /**
- * This API will add a tag with the id as re.param and if it exists in Tag collection then it will add it to the bookmark whose id is passed as body of The api
- * in JSON format
+ * This API will add the tag with the id passed in body as tag to bookmark having id passed in Bookmark in body as JSON format
  */
 router.patch('/addTag',async(req,res)=>{
     const tag = await Tags.findById(req.body.tag)

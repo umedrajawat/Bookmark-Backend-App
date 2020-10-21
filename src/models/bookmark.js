@@ -29,12 +29,7 @@ const userSchema = new mongoose.Schema({
        type: String,
        trim: true,
     },
-    Tag:[
-        {
-            type:String,
-            unique:true
-        }
-    ]
+    Tag:[]
 }, {
     timestamps: true
 })

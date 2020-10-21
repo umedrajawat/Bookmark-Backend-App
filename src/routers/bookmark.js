@@ -1,11 +1,11 @@
 const express = require("express");
-const Bookmark = require("../models/Bookmark");
+const Bookmark = require("../models/bookmark");
 var url = require("url");
 var Meta = require("html-metadata-parser");
 const router = new express.Router();
 
 /**
- * This API is used to create a new Bookmark by adding the link wof the Bookmark with the requext body as JSON
+ * This API is used to create a new Bookmark by adding the link of the Bookmark with the request body as JSON
  * Title and Publisher are fetched from the link using url and html-metadata-parser
  */
 
